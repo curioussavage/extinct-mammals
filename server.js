@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+
+var api = require('./apis')
 
 bodyParser = require('body-parser')
 
@@ -20,31 +21,13 @@ db.once('open', function callback () {
   console.log('connected to animals database...')
 });
 
-var AnimalSchema = mongoose.Schema({
-    name: String,
-    type: String,
-    yearExtinct: Number 
-});
 
-var Mammal = mongoose.model('Animal', AnimalSchema);
 
-var deadanimal = new Mammal({ name: 'Bob', type: 'builder', yearExtinct: '1999' })
-deadanimal.save(function (err, deadanimal) {
-  if (err) return console.error(err);
-});
 
 // handle requests..
 
 
-app.get('/', function(req, res ){
-
-    var x = Mammal.find(function(err, docs){
-    	if (err) return res.json(err);
-
-    	res.send(200, docs);
-    })
-
-});
+app.get('/', api.list);
 
 app.post('/', function(req, res) {
    console.log(req.body);
