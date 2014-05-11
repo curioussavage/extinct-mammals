@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose')
 
-AnimalSchema = mongoose.Schema({
+var AnimalSchema = mongoose.Schema({
     name: String,
     type: String,
     yearExtinct: Number

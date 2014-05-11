@@ -27,23 +27,10 @@ db.once('open', function callback () {
 // handle requests..
 
 
-app.get('/', api.list);
+app.get('/mammals', api.list);
+app.get('/mammals/:type', api.list);
 
-app.post('/', function(req, res) {
-   console.log(req.body);
-
-   var mammal = {
-   	name: req.body.name,
-   	type: req.body.type,
-   	yearExtinct: req.body.yearExtinct
-
-   }
-   var newMammal = new Mammal(mammal)
-   newMammal.save(function(err) {
-   	if (err) return console.error(err);
-   })
-    res.json(mammal);
-});
+app.post('/', api.make );
 
 
 
